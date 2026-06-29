@@ -1,0 +1,112 @@
+{
+  "menuCategories": [
+    {
+      "name": "Hot Drinks",
+      "icon": "☕",
+      "items": [
+        {
+          "name": "Purr-fect Latte",
+          "desc": "Oat milk, double shot, cat art",
+          "price": "$6.50"
+        },
+        {
+          "name": "Caramel Pawccino",
+          "desc": "Caramel, steamed milk, espresso",
+          "price": "$7.00"
+        },
+        {
+          "name": "Chamomile Dream",
+          "desc": "Soothing chamomile blend",
+          "price": "$5.00"
+        },
+        {
+          "name": "Hot Chocolate",
+          "desc": "Rich chocolate with whipped cream",
+          "price": "$5.50"
+        },
+        {
+          "name": "Mocha Meow",
+          "desc": "Espresso with chocolate and steamed milk",
+          "price": "$6.00"
+        },
+        {
+          "name": "Long Black",
+          "desc": "Rich espresso served with hot water",
+          "price": "$4.50"
+        }
+      ]
+    },
+    {
+      "name": "Cold Drinks",
+      "icon": "🧊",
+      "items": [
+        {
+          "name": "Iced Biscuit Brew",
+          "desc": "Cold brew over oat milk",
+          "price": "$7.50"
+        },
+        {
+          "name": "Melon Mochi Fizz",
+          "desc": "Sparkling melon + lychee jelly",
+          "price": "$6.00"
+        },
+        {
+          "name": "Matcha Paws",
+          "desc": "Iced matcha, oat milk",
+          "price": "$7.00"
+        },
+        {
+          "name": "Berry Cat-ccino",
+          "desc": "Iced berry espresso blend",
+          "price": "$6.50"
+        },
+        {
+          "name": "Citrus Kitty Cooler",
+          "desc": "Lemon, lime, orange soda",
+          "price": "$5.00"
+        },
+        {
+          "name": "Peachy Purrfection",
+          "desc": "Iced peach tea with boba",
+          "price": "$6.50"
+        }
+      ]
+    },
+    {
+      "name": "Treats",
+      "icon": "🍰",
+      "items": [
+        {
+          "name": "Cat Paw Cookies",
+          "desc": "Butter shortbread, glazed",
+          "price": "$4.50"
+        },
+        {
+          "name": "Mochi Cheesecake",
+          "desc": "Soft mochi base, cream cheese",
+          "price": "$8.00"
+        },
+        {
+          "name": "Croissant Kitty",
+          "desc": "Almond cream croissant",
+          "price": "$6.00"
+        },
+        {
+            "name": "Whisker Waffles",
+            "desc": "Mini waffles with syrup",
+            "price": "$5.50"
+        },
+        {
+            "name": "Tiramisu Whiskers",
+            "desc": "Classic tiramisu with a cat twist",
+            "price": "$7.50"
+        },
+        {
+            "name": "Paw Print Macarons",
+            "desc": "Assorted flavors with paw print design",
+            "price": "$5.00"
+        }
+      ]
+    }
+  ]
+}

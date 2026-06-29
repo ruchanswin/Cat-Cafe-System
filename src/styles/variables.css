@@ -1,0 +1,23 @@
+:root {
+  --color-text: #4B2C2D;
+  --color-primary: #B65C68;
+  --color-primary-hover: #a7535e;
+  --color-accent: #FF6B8A;
+
+  --color-cream: #FFF5E1;
+  --color-bg-light: #FFF9F2;
+  --color-bg-blush: #FFEDEA;
+  --color-bg-soft: #FFF7EE;
+
+  --color-soft-pink: #E8A6A1;
+  --color-border: #B39C8E;
+  --color-caramel: #FFD6A5;
+
+  --radius-lg: 2rem;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 8px 24px rgba(182, 92, 104, 0.12);
+
+  --font-display: 'Chewy', cursive;
+  --font-body: Arial, sans-serif;
+}

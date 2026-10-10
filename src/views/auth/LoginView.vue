@@ -9,12 +9,7 @@
               Access your membership account or admin features
             </p>
 
-            <!-- Step 1: Normal login form -->
-            <form
-              v-if="!otpSent"
-              @submit.prevent="handleLogin"
-              class="login-form"
-            >
+            <form @submit.prevent="handleLogin" class="login-form">
               <div class="form-group">
                 <label for="email" class="form-label">Email Address</label>
                 <input
@@ -44,51 +39,8 @@
               </button>
             </form>
 
-            <!-- Step 2: Admin OTP form -->
-            <form
-              v-else
-              @submit.prevent="handleVerifyOtp"
-              class="login-form"
-            >
-              <div class="otp-info">
-                <h3>Admin Verification</h3>
-                <p>
-                  An OTP has been sent to the admin phone number. Enter the code
-                  below to continue.
-                </p>
-              </div>
-
-              <div class="form-group">
-                <label for="otp" class="form-label">OTP Code</label>
-                <input
-                  id="otp"
-                  v-model="otp"
-                  type="text"
-                  placeholder="Enter OTP"
-                  required
-                  class="form-input"
-                />
-              </div>
-
-              <button type="submit" class="btn-login" :disabled="loading">
-                {{ loading ? 'Verifying...' : 'Verify OTP' }}
-              </button>
-
-              <button
-                type="button"
-                class="btn-secondary"
-                @click="resetOtpStep"
-              >
-                Back to Login
-              </button>
-            </form>
-
             <div v-if="errorMessage" class="error-message">
               {{ errorMessage }}
-            </div>
-
-            <div v-if="successMessage" class="success-message">
-              {{ successMessage }}
             </div>
 
             <div class="credentials-helper">
@@ -98,9 +50,6 @@
                 <p><strong>Admin Account:</strong></p>
                 <p>Email: <code>admin@catcafe.com</code></p>
                 <p>Password: <code>admin123</code></p>
-                <p class="small-note">
-                  Admin login requires OTP verification.
-                </p>
               </div>
 
               <div class="credential-item">
@@ -120,22 +69,17 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../../stores/auth'
 import PageLayout from '../../components/layout/PageLayout.vue'
-import { sendAdminOtp, verifyAdminOtp } from '../../services/otpApi'
 
 const router = useRouter()
-const { login, setAdminUser } = useAuth()
+const { login } = useAuth()
 
 const email = ref('')
 const password = ref('')
-const otp = ref('')
-const otpSent = ref(false)
 const loading = ref(false)
 const errorMessage = ref('')
-const successMessage = ref('')
 
 async function handleLogin() {
   errorMessage.value = ''
-  successMessage.value = ''
 
   if (!email.value || !password.value) {
     errorMessage.value = 'Please fill in all fields'
@@ -145,48 +89,13 @@ async function handleLogin() {
   loading.value = true
 
   try {
-    if (email.value === 'admin@catcafe.com') {
-      await sendAdminOtp(email.value, password.value)
-      otpSent.value = true
-      successMessage.value = 'OTP sent. Please check the admin phone.'
-    } else {
-      login(email.value, password.value)
-      await router.push('/profile')
-    }
+    const user = login(email.value, password.value)
+    await router.push(user.role === 'admin' ? '/admin' : '/profile')
   } catch (error) {
     errorMessage.value = error.message || 'Login failed. Please try again.'
   } finally {
     loading.value = false
   }
-}
-
-async function handleVerifyOtp() {
-  errorMessage.value = ''
-  successMessage.value = ''
-
-  if (!otp.value) {
-    errorMessage.value = 'Please enter the OTP code'
-    return
-  }
-
-  loading.value = true
-
-  try {
-    const result = await verifyAdminOtp(otp.value)
-    setAdminUser(result.user)
-    await router.push('/admin')
-  } catch (error) {
-    errorMessage.value = error.message || 'Invalid OTP. Please try again.'
-  } finally {
-    loading.value = false
-  }
-}
-
-function resetOtpStep() {
-  otpSent.value = false
-  otp.value = ''
-  errorMessage.value = ''
-  successMessage.value = ''
 }
 </script>
 
@@ -295,12 +204,6 @@ function resetOtpStep() {
   cursor: not-allowed;
 }
 
-.btn-secondary {
-  background: var(--color-cream);
-  color: var(--color-text);
-  border: 2px solid var(--color-border);
-}
-
 .error-message {
   background: #ffe0e0;
   color: #c41e3a;
@@ -309,35 +212,6 @@ function resetOtpStep() {
   margin-bottom: 1rem;
   border-left: 4px solid #c41e3a;
   text-align: center;
-}
-
-.success-message {
-  background: rgba(168, 191, 160, 0.25);
-  color: #3f6b3f;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-  border-left: 4px solid #3f6b3f;
-  text-align: center;
-}
-
-.otp-info {
-  background: var(--color-cream);
-  padding: 1rem;
-  border-radius: 1rem;
-  border: 2px solid var(--color-border);
-}
-
-.otp-info h3 {
-  margin: 0 0 0.5rem;
-  color: var(--color-primary);
-}
-
-.otp-info p {
-  margin: 0;
-  color: var(--color-text);
-  font-size: 0.95rem;
-  line-height: 1.5;
 }
 
 .credentials-helper {

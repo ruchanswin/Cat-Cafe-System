@@ -39,17 +39,11 @@ export function useAuth() {
     currentUser.value = null
     localStorage.removeItem('currentUser')
   }
-  function setAdminUser(user) {
-  currentUser.value = user
-  localStorage.setItem('currentUser', JSON.stringify(user))
-}
-
   return {
-  currentUser,
-  isLoggedIn,
-  isAdmin,
-  login,
-  logout,
-  setAdminUser
-}
+    currentUser,
+    isLoggedIn,
+    isAdmin,
+    login,
+    logout
+  }
 }
